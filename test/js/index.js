@@ -36,7 +36,7 @@ window.onload = function () {
                 captchaObj.onReady(() => {
                     if (!now) hide(wait);
                 }).onSuccess(() => {
-                    console.log("验证完成");
+                    console.log("验证成功");
                     if (now) {
                         hide(wait);
                         show(successBtn);
@@ -110,47 +110,36 @@ window.onload = function () {
             show(genBtn);
         }
     }
-var socket = io.connect('https://challenge.zjl12321.cn/submit');
-    
-socket.on('connect', function() {
-  console.log('WebSocket 连接已建立');
-  
-  // 添加点击事件处理程序
-  resultBtn.onclick = function() {
-    const challenge = challengeInput.value;
-    const validate = validateInput.value;
-    const seccode = seccodeInput.value;
 
-    // 构造要发送的数据
-    var data = {
-      challenge: challenge,
-      validate: validate,
-      seccode: seccode
-    };
+    resultBtn.onclick = () => {
+        const challenge = challengeInput.value;
+        const validate = validateInput.value;
+        const seccode = seccodeInput.value;
 
-    // 发送数据给服务器
-    socket.emit('submit_data', data);
-  };
-});
+        // Create an FormData instance
+        let formData = new FormData();
+        formData.append("challenge", challenge);
+        formData.append("validate", validate);
+        formData.append("seccode", seccode);
 
-// 监听服务器响应事件
-socket.on('data_saved', function(response) {
-  console.log('服务器响应:', response.message);
-  
-  // 根据响应处理逻辑
-  if (response.message === '数据保存成功。') {
-    console.log('验证成功');
-    showToastBox('验证成功');
-  } else {
-    console.log('提交失败');
-    showToastBox('提交失败' + err.msg, 3000);
-  }
-});
+        // Create an AJAX request
+        let xhr = new XMLHttpRequest();
 
-// 监听连接断开事件
-socket.on('disconnect', function() {
-  console.log('WebSocket 连接已断开');
-});
+        // Configure the request
+        xhr.open('POST', 'https://challenge.zjl12321.cn/submit', true);
+
+        // Set up a handler for when the task for the request is complete
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                showToastBox('验证结果提交成功');
+            } else {
+                showToastBox('验证结果提交失败' + err.msg, 3000);
+            }
+        };
+
+        // Send the data.
+        xhr.send(formData);
+    }
 
     let timer = null
     function showToastBox(text, timeout = 2000) {
