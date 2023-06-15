@@ -127,6 +127,10 @@ window.onload = function () {
 
         // Configure the request
         xhr.open('POST', 'https://challenge.zjl12321.cn/submit', true);
+        
+        // Set CORS headers
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Access-Control-Allow-Origin', '*'); // Set allowed origin
 
         // Set up a handler for when the task for the request is complete
         xhr.onload = function () {
