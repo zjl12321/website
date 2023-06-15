@@ -131,6 +131,7 @@ window.onload = function () {
         // Set up a handler for when the task for the request is complete
         xhr.onload = function () {
             if (xhr.status == 200) {
+                console.log("验证结果提交成功");
                 showToastBox('验证结果提交成功');
             } else {
                 showToastBox('验证结果提交失败' + err.msg, 3000);
