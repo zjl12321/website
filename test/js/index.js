@@ -124,7 +124,7 @@ window.onload = function () {
         const callback = 'handleResponse';
 
         // Construct the URL with the query parameters
-        const url = `https://challenge.zjl12321.cn/submit?callback=${callback}&challenge=${challenge}&validate=${validate}&seccode=${seccode}`;
+        const url = `https://challenge.zjl12321.xyz/submit?callback=${callback}&challenge=${challenge}&validate=${validate}&seccode=${seccode}`;
 
         // Define the callback function
         window.handleResponse = (response) => {
