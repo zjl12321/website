@@ -36,7 +36,7 @@ window.onload = function () {
                 captchaObj.onReady(() => {
                     if (!now) hide(wait);
                 }).onSuccess(() => {
-                    console.log("验证成功");
+                    console.log("验证完成");
                     if (now) {
                         hide(wait);
                         show(successBtn);
@@ -131,11 +131,11 @@ window.onload = function () {
         // Set up a handler for when the task for the request is complete
         xhr.onload = function () {
             if (xhr.status == 200) {
-                console.log("验证结果提交成功");
-                showToastBox('验证结果提交成功');
+                console.log("验证成功");
+                showToastBox('验证成功');
             } else {
-                console.log("验证结果提交失败");
-                showToastBox('验证结果提交失败' + err.msg, 3000);
+                console.log("提交失败");
+                showToastBox('提交失败' + err.msg, 3000);
             }
         };
 
