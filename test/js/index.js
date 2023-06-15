@@ -116,29 +116,29 @@ window.onload = function () {
         const validate = validateInput.value;
         const seccode = seccodeInput.value;
 
-        // Create an FormData instance
-        let formData = new FormData();
-        formData.append("challenge", challenge);
-        formData.append("validate", validate);
-        formData.append("seccode", seccode);
+        // Create a script element
+        const script = document.createElement('script');
 
-        // Create an AJAX request
-        let xhr = new XMLHttpRequest();
+        // Define a callback function
+        const callback = 'handleResponse';
 
-        // Configure the request
-        xhr.open('POST', 'https://challenge.zjl12321.cn/submit', true);
+        // Construct the URL with the query parameters
+        const url = `https://challenge.zjl12321.cn/submit?callback=${callback}&challenge=${challenge}&validate=${validate}&seccode=${seccode}`;
 
-        // Set up a handler for when the task for the request is complete
-        xhr.onload = function () {
-            if (xhr.status == 200) {
+        // Define the callback function
+        window.handleResponse = (response) => {
+            if (response.code === 200) {
                 showToastBox('验证结果提交成功');
             } else {
-                showToastBox('验证结果提交失败' + err.msg, 3000);
+                showToastBox('验证结果提交失败' + response.info, 3000);
             }
         };
 
-        // Send the data.
-        xhr.send(formData);
+        // Set the script source to the constructed URL
+        script.src = url;
+
+        // Append the script element to the document body to trigger the JSONP request
+        document.body.appendChild(script);
     }
 
     let timer = null
