@@ -103,6 +103,8 @@ window.onload = function () {
         if (gt !== '' && challenge !== '') {
             gtInput.value = gt;
             challengeInput.value = challenge;
+            hide(wait);
+            show(genBtn);
         }else {
             console.log("未从URL中找到 gt 与 challenge");
             hide(wait);
