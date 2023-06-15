@@ -134,6 +134,7 @@ window.onload = function () {
                 console.log("验证结果提交成功");
                 showToastBox('验证结果提交成功');
             } else {
+                console.log("验证结果提交失败");
                 showToastBox('验证结果提交失败' + err.msg, 3000);
             }
         };
