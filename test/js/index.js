@@ -37,7 +37,6 @@ window.onload = function () {
                     if (!now) hide(wait);
                 }).onSuccess(() => {
                     console.log("验证成功");
-                    showToastBox("验证成功");
                     if (now) {
                         hide(wait);
                         show(successBtn);
